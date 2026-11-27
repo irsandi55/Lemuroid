@@ -44,6 +44,11 @@ enum class GameMenuRoute(
         titleId = R.string.game_menu_settings,
         parent = HOME,
     ),
+    MEMORY_SEARCH(
+        route = "memory_search",
+        titleId = R.string.game_menu_memory_search,
+        parent = HOME,
+    ),
     ;
 
     fun canGoBack(): Boolean {
