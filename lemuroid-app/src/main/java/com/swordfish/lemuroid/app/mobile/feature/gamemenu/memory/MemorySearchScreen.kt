@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -68,7 +69,7 @@ private enum class SearchMode(val label: String) {
 }
 
 @Composable
-fun MemorySearchScreen() {
+fun MemorySearchScreen(visible: Boolean, onMinimize: () -> Unit) {
     val view = RunningGameMemory.currentView()
     val scope = rememberCoroutineScope()
 
@@ -144,15 +145,29 @@ fun MemorySearchScreen() {
             }
         }
 
-    Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+    if (!visible) return
+
+    Box(
+        modifier = Modifier.fillMaxSize().padding(12.dp),
+        contentAlignment = Alignment.Center,
     ) {
-        Text("Pencarian Memori", style = MaterialTheme.typography.titleLarge)
-        Text(
-            "Cari nilai di RAM GBA. Mulai dengan nilai yang diketahui atau scan nilai yang belum diketahui, lalu saring hasil setelah nilainya berubah di game.",
-            style = MaterialTheme.typography.bodySmall,
-        )
+        Card(modifier = Modifier.fillMaxWidth().fillMaxHeight(0.86f)) {
+            Column(
+                modifier = Modifier.fillMaxSize().padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text("Pencarian Memori", style = MaterialTheme.typography.titleLarge)
+                    TextButton(onClick = onMinimize) { Text("Sembunyikan") }
+                }
+                Text(
+                    "Cari nilai di RAM GBA. Sembunyikan panel untuk bermain, lalu buka lagi untuk menyaring hasil scan.",
+                    style = MaterialTheme.typography.bodySmall,
+                )
 
         when {
             view == null -> {
@@ -338,6 +353,7 @@ fun MemorySearchScreen() {
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
+            }
             }
         }
     }
