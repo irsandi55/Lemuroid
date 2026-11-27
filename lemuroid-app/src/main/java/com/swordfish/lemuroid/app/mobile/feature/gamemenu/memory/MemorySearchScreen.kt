@@ -95,7 +95,7 @@ fun MemorySearchScreen(visible: Boolean, onMinimize: () -> Unit) {
         selectedRegion = null
         if (view != null) {
             val packed = withContext(Dispatchers.IO) {
-                runCatching { view.getMemoryRegions(useEmulationThread = false) }.getOrDefault(longArrayOf())
+                runCatching { view.getMemoryRegions(useEmulationThread = true) }.getOrDefault(longArrayOf())
             }
             val foundRegions = mutableListOf<MemoryRegion>()
             for (index in 0 until packed.size / 3) {
@@ -112,7 +112,7 @@ fun MemorySearchScreen(visible: Boolean, onMinimize: () -> Unit) {
                 }
             }
             regions = foundRegions
-            selectedRegion = foundRegions.firstOrNull()
+            selectedRegion = foundRegions.firstOrNull { it.startAddress == 0x02000000L } ?: foundRegions.firstOrNull()
         }
         loadingRegions = false
     }
@@ -274,7 +274,7 @@ fun MemorySearchScreen(visible: Boolean, onMinimize: () -> Unit) {
                                                 region.coreIndex,
                                                 0,
                                                 region.length,
-                                                useEmulationThread = false,
+                                                useEmulationThread = true,
                                             )
                                         }
                                         if (snapshot.size.toLong() != region.length) {
