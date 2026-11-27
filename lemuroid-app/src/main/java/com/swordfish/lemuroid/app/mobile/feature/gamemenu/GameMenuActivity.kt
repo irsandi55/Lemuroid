@@ -46,6 +46,7 @@ import com.swordfish.lemuroid.app.mobile.feature.gamemenu.coreoptions.GameMenuCo
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.coreoptions.GameMenuCoreOptionsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.states.GameMenuStatesScreen
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.states.GameMenuStatesViewModel
+import com.swordfish.lemuroid.app.mobile.feature.gamemenu.memory.MemorySearchScreen
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.shared.GameMenuContract
 import com.swordfish.lemuroid.app.shared.coreoptions.LemuroidCoreOption
@@ -225,6 +226,9 @@ class GameMenuActivity : RetrogradeComponentActivity() {
                             ),
                             gameMenuRequest,
                         )
+                    }
+                    composable(GameMenuRoute.MEMORY_SEARCH) {
+                        MemorySearchScreen()
                     }
                 }
             }
