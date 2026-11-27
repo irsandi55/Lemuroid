@@ -182,6 +182,7 @@ class BaseGameScreenViewModel(
         lifecycle: LifecycleOwner,
     ): GLRetroView {
         val (gameData, result) = retroGameView.createRetroView(context, lifecycle)
+        RunningGameMemory.attach(result)
         viewModelScope.launch {
             gameData.quickSaveData?.let {
                 saves.restoreAutoSaveAsync(it)
