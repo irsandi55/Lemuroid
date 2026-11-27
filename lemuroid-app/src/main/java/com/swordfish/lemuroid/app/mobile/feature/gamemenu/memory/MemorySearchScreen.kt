@@ -358,6 +358,7 @@ fun MemorySearchScreen(visible: Boolean, onMinimize: () -> Unit) {
         }
     }
 }
+}
 
 private fun parseSearchValue(input: String): Long? {
     val value = input.trim()
