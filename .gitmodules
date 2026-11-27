@@ -2,3 +2,8 @@
 	path = lemuroid-cores
 	url = https://github.com/Swordfish90/LemuroidCores
 	branch = master
+
+[submodule "third_party/LibretroDroid"]
+	path = third_party/LibretroDroid
+	url = https://github.com/irsandi55/LibretroDroid
+	branch = feature/memory-search-api
