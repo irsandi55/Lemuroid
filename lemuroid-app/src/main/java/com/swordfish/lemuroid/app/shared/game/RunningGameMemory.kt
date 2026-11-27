@@ -1,14 +1,16 @@
 package com.swordfish.lemuroid.app.shared.game
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.swordfish.libretrodroid.GLRetroView
 
 /**
- * Holds the active game's view inside the dedicated :game process so the game menu
- * can request synchronized memory snapshots without trying to access another process.
+ * Observable access to the active view in the dedicated game process.
+ * The view is only exposed while its game activity is alive.
  */
 object RunningGameMemory {
-    @Volatile
-    private var activeView: GLRetroView? = null
+    private var activeView by mutableStateOf<GLRetroView?>(null)
 
     fun attach(view: GLRetroView) {
         activeView = view
