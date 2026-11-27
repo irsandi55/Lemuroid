@@ -34,7 +34,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.app.shared.game.RunningGameMemory
-import com.swordfish.libretrodroid.GLRetroView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -180,7 +179,10 @@ fun MemorySearchScreen() {
                                 onClick = {
                                     selectedRegion = region
                                     regionMenuExpanded = false
-                                    resetScanState { candidates = IntArray(0); previousSnapshot = null; currentSnapshot = null; hasScanned = false }
+                                    candidates = IntArray(0)
+                                    previousSnapshot = null
+                                    currentSnapshot = null
+                                    hasScanned = false
                                     message = "Region berubah. Mulai scan baru."
                                 },
                             )
