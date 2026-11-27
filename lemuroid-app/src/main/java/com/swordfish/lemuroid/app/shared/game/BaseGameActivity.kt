@@ -352,6 +352,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     override fun onDestroy() {
         if (!isChangingConfigurations) {
+            RunningGameMemory.clear()
             GameService.requestTermination()
         }
         super.onDestroy()
