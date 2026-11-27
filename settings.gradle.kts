@@ -16,8 +16,11 @@ include(
     ":lemuroid-app-ext-free",
     ":lemuroid-app-ext-play",
     ":bundled-cores",
-    ":baselineprofile"
+    ":baselineprofile",
+    ":libretrodroid"
 )
+
+project(":libretrodroid").projectDir = File("third_party/LibretroDroid/libretrodroid")
 
 project(":bundled-cores").projectDir = File("lemuroid-cores/bundled-cores")
 
