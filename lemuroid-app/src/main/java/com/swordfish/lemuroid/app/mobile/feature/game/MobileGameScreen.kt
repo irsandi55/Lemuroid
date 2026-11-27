@@ -20,9 +20,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Height
 import androidx.compose.material.icons.filled.OpenInFull
 import androidx.compose.material.icons.filled.RotateLeft
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -50,6 +52,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.swordfish.lemuroid.app.shared.game.BaseGameScreenViewModel
+import com.swordfish.lemuroid.app.mobile.feature.gamemenu.memory.MemorySearchScreen
 import com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelTouchControls.Companion.MENU_LOADING_ANIMATION_MILLIS
 import com.swordfish.lemuroid.app.shared.settings.HapticFeedbackMode
 import com.swordfish.lemuroid.lib.controller.ControllerConfig
@@ -67,6 +70,7 @@ import gg.padkit.inputstate.InputState
 @Composable
 fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        val showMemorySearch = remember { mutableStateOf(false) }
         val isLandscape = constraints.maxWidth > constraints.maxHeight
 
         LaunchedEffect(isLandscape) {
@@ -219,6 +223,21 @@ fun MobileGameScreen(viewModel: BaseGameScreenViewModel) {
                 CircularProgressIndicator()
             }
         }
+
+        Box(
+            modifier = Modifier.fillMaxSize().padding(8.dp),
+            contentAlignment = Alignment.TopEnd,
+        ) {
+            IconButton(onClick = { showMemorySearch.value = true }) {
+                Icon(Icons.Filled.Search, contentDescription = "Pencarian Memori")
+            }
+        }
+
+        MemorySearchScreen(
+            visible = showMemorySearch.value,
+            onMinimize = { showMemorySearch.value = false },
+        )
+
     }
 }
 
